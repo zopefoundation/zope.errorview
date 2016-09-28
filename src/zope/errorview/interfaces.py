@@ -1,4 +1,4 @@
-from zope.interface import Interface, implements, Attribute
+from zope.interface import Interface, implementer, Attribute
 
 
 class IHandleExceptionEvent(Interface):
@@ -7,8 +7,8 @@ class IHandleExceptionEvent(Interface):
     request = Attribute('The current request')
 
 
+@implementer(IHandleExceptionEvent)
 class HandleExceptionEvent(object):
-    implements(IHandleExceptionEvent)
 
     def __init__(self, request):
         self.request = request
