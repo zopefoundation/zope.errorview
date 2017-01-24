@@ -30,7 +30,7 @@ setup(name='zope.errorview',
       author_email='zope-dev@zope.org',
       description='Basic HTTP and Browser exception views.',
       long_description=(
-          read('README.txt')
+          read('README.rst')
           + '\n\n' +
           read('CHANGES.txt')
           ),
