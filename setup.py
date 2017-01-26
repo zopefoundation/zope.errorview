@@ -21,8 +21,11 @@
 import os
 from setuptools import setup, find_packages
 
+
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+    with open(os.path.join(os.curdir, *rnames)) as f:
+        return f.read()
+
 
 setup(name='zope.errorview',
       version='0.12dev',
@@ -30,10 +33,10 @@ setup(name='zope.errorview',
       author_email='zope-dev@zope.org',
       description='Basic HTTP and Browser exception views.',
       long_description=(
-          read('README.txt')
+          read('README.rst')
           + '\n\n' +
-          read('CHANGES.txt')
-          ),
+          read('CHANGES.rst')
+      ),
       keywords="zope3 http error view",
       classifiers=[
           'Development Status :: 5 - Production/Stable',
@@ -51,14 +54,14 @@ setup(name='zope.errorview',
       package_dir={'': 'src'},
       namespace_packages=['zope'],
       extras_require={
-          'test':[
+          'test': [
               'zope.testing'],
           'browser': [
               'zope.authentication',
               'zope.browser',
               'zope.browserpage',
           ],
-          },
+      },
       install_requires=[
           'setuptools',
           'zope.component',
@@ -67,7 +70,7 @@ setup(name='zope.errorview',
           'zope.interface',
           'zope.publisher',
           'zope.security',
-          ],
+      ],
       include_package_data=True,
       zip_safe=False,
       )
