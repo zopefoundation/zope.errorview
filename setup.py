@@ -32,8 +32,8 @@ setup(name='zope.errorview',
       long_description=(
           read('README.rst')
           + '\n\n' +
-          read('CHANGES.txt')
           ),
+          read('CHANGES.rst')
       keywords="zope3 http error view",
       classifiers=[
           'Development Status :: 5 - Production/Stable',
