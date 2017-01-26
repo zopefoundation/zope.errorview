@@ -2,8 +2,8 @@ language: python
 python:
     - 2.7
 install:
-    - python bootstrap.py
-    - bin/buildout
+    - python bootstrap.py --setuptools-version=33.1.1
+    - bin/buildout versions:setuptools=33.1.1
 script:
     - bin/test -v1
 notifications:
