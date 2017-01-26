@@ -22,7 +22,9 @@ import os
 from setuptools import setup, find_packages
 
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+    with open(os.path.join(os.curdir, *rnames)) as f:
+        return f.read()
+
 
 setup(name='zope.errorview',
       version='0.12dev',
