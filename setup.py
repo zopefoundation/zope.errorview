@@ -21,8 +21,11 @@
 import os
 from setuptools import setup, find_packages
 
+
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+    with open(os.path.join(os.path.dirname(__file__), *rnames)) as f:
+        return f.read()
+
 
 setup(name='zope.errorview',
       version='0.12.dev0',
@@ -51,14 +54,15 @@ setup(name='zope.errorview',
       package_dir={'': 'src'},
       namespace_packages=['zope'],
       extras_require={
-          'test':[
-              'zope.testing'],
+          'test': [
+              'zope.testing',
+          ],
           'browser': [
               'zope.authentication',
               'zope.browser',
               'zope.browserpage',
           ],
-          },
+      },
       install_requires=[
           'setuptools',
           'zope.component',
