@@ -35,16 +35,16 @@ class TestErrorViews(TestCase):
 
     def test_exceptionviewbase(self):
         view = http.ExceptionViewBase(Exception(), self.request)
-        self.failUnless(IHTTPException.providedBy(view))
-        self.assertEquals(str(view), '')
-        self.assertEquals(view(), '')
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(str(view), '')
+        self.assertEqual(view(), '')
         self.assertEqual(self.request.response.getStatus(), 500)
 
     def test_exceptionview(self):
         view = http.ExceptionView(Exception(), self.request)
-        self.failUnless(IHTTPException.providedBy(view))
-        self.assertEquals(str(view), '')
-        self.assertEquals(view(), '')
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(str(view), '')
+        self.assertEqual(view(), '')
         self.assertEqual(self.request.response.getStatus(), 500)
 
     def test_systemerrormixin_view(self):
@@ -52,44 +52,55 @@ class TestErrorViews(TestCase):
                               http.SystemErrorViewMixin):
             pass
         view = SystemErrorView(Exception(), self.request)
-        self.failUnless(IHTTPException.providedBy(view))
-        self.failUnless(ISystemErrorView.providedBy(view))
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertTrue(ISystemErrorView.providedBy(view))
         self.assertTrue(view.isSystemError())
-        self.assertEquals(str(view), '')
-        self.assertEquals(view(), '')
+        self.assertEqual(str(view), '')
+        self.assertEqual(view(), '')
         self.assertEqual(self.request.response.getStatus(), 500)
 
     def test_traversalexceptionview(self):
         view = http.TraversalExceptionView(TraversalException(), self.request)
-        self.failUnless(IHTTPException.providedBy(view))
-        self.assertEquals(view(), '')
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(view(), '')
         self.assertEqual(self.request.response.getStatus(), 404)
-        # XXX test the MKCOL verb here too.
+
+        self.request = HTTPRequest('', {'REQUEST_METHOD': 'MKCOL'})
+        view = http.TraversalExceptionView(TraversalException(), self.request)
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(view(), '')
+        self.assertEqual(self.request.response.getStatus(), 404)
+
+        self.request.setTraversalStack(['foo', 'bar'])
+        view = http.TraversalExceptionView(TraversalException(), self.request)
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(view(), '')
+        self.assertEqual(self.request.response.getStatus(), 409)
 
     def test_unauthorizedexceptionview(self):
         view = http.UnauthorizedView(Unauthorized(), self.request)
-        self.failUnless(IHTTPException.providedBy(view))
-        self.assertEquals(view(), '')
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(view(), '')
         self.assertEqual(self.request.response.getStatus(), 401)
-        self.failUnless(
+        self.assertTrue(
             self.request.response.getHeader(
                 'WWW-Authenticate', '', True).startswith('basic'))
 
     def test_methodnotallowedview(self):
         error = MethodNotAllowed(object(), self.request)
         view = http.MethodNotAllowedView(error, self.request)
-        self.failUnless(IHTTPException.providedBy(view))
-        self.assertEquals(view(), '')
-        self.assertEquals(self.request.response.getStatus(), 405)
-        self.assertEquals(self.request.response.getHeader('Allow'), '')
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(view(), '')
+        self.assertEqual(self.request.response.getStatus(), 405)
+        self.assertEqual(self.request.response.getHeader('Allow'), '')
 
         class MyMethodNotAllowedView(http.MethodNotAllowedView):
             def allowed(self):
                 return 'GET', 'POST', 'PUT', 'DELETE'
 
         MyMethodNotAllowedView(error, self.request)()
-        self.assertEquals(self.request.response.getStatus(), 405)
-        self.assertEquals(
+        self.assertEqual(self.request.response.getStatus(), 405)
+        self.assertEqual(
             self.request.response.getHeader('Allow'), 'GET, POST, PUT, DELETE')
 
 
@@ -104,29 +115,29 @@ class TestErrorViewsFunctional(TestCase):
         self.request = HTTPRequest('', {})
 
     def test_defaultname(self):
-        self.assertEquals(
+        self.assertEqual(
             getDefaultViewName(Exception(), self.request), 'index.html')
-        self.assertEquals(
+        self.assertEqual(
             getDefaultViewName(
                 TraversalException(), self.request), 'index.html')
-        self.assertEquals(
+        self.assertEqual(
             getDefaultViewName(
                 Unauthorized(), self.request), 'index.html')
         error = MethodNotAllowed(object(), self.request)
-        self.assertEquals(
+        self.assertEqual(
             getDefaultViewName(error, self.request), 'index.html')
 
     def test_exceptionview(self):
         view = getMultiAdapter((Exception(), self.request), name='index.html')
-        self.failUnless(IHTTPException.providedBy(view))
-        self.assertEquals(view(), '')
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(view(), '')
         self.assertEqual(self.request.response.getStatus(), 500)
 
     def test_traversalexceptionview(self):
         view = getMultiAdapter(
             (TraversalException(), self.request), name='index.html')
-        self.failUnless(IHTTPException.providedBy(view))
-        self.assertEquals(view(), '')
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(view(), '')
         self.assertEqual(self.request.response.getStatus(), 404)
         # XXX test the MKCOL verb here too.
 
@@ -134,27 +145,27 @@ class TestErrorViewsFunctional(TestCase):
         view = getMultiAdapter((NotFound(object(), self.request),
                                self.request),
                                name='index.html')
-        self.failUnless(IHTTPException.providedBy(view))
-        self.assertEquals(view(), '')
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(view(), '')
         self.assertEqual(self.request.response.getStatus(), 404)
 
     def test_unauthorizedexceptionview(self):
         view = getMultiAdapter(
             (Unauthorized(), self.request), name='index.html')
-        self.failUnless(IHTTPException.providedBy(view))
-        self.assertEquals(view(), '')
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(view(), '')
         self.assertEqual(self.request.response.getStatus(), 401)
-        self.failUnless(
+        self.assertTrue(
             self.request.response.getHeader(
                 'WWW-Authenticate', '', True).startswith('basic'))
 
     def test_methodnotallowedview(self):
         error = MethodNotAllowed(object(), self.request)
         view = getMultiAdapter((error, self.request), name='index.html')
-        self.failUnless(IHTTPException.providedBy(view))
-        self.assertEquals(view(), '')
-        self.assertEquals(self.request.response.getStatus(), 405)
-        self.assertEquals(self.request.response.getHeader('Allow'), '')
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(view(), '')
+        self.assertEqual(self.request.response.getStatus(), 405)
+        self.assertEqual(self.request.response.getHeader('Allow'), '')
 
         class MyMethodNotAllowedView(http.MethodNotAllowedView):
             def allowed(self):
@@ -165,6 +176,6 @@ class TestErrorViewsFunctional(TestCase):
             (IMethodNotAllowed, IHTTPRequest), Interface, 'index.html')
 
         view = getMultiAdapter((error, self.request), name='index.html')()
-        self.assertEquals(self.request.response.getStatus(), 405)
-        self.assertEquals(
+        self.assertEqual(self.request.response.getStatus(), 405)
+        self.assertEqual(
             self.request.response.getHeader('Allow'), 'GET, POST, PUT, DELETE')

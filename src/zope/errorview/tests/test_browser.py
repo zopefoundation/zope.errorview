@@ -16,7 +16,7 @@ from unittest import TestCase
 from zope.authentication.interfaces import IAuthentication
 from zope.component import getUtility, getMultiAdapter
 from zope.component.testlayer import ZCMLFileLayer
-from zope.interface import implements
+from zope.interface import implementer
 from zope.publisher.browser import TestRequest
 from zope.publisher.defaultview import getDefaultViewName
 from zope.publisher.interfaces.http import IHTTPException
@@ -31,8 +31,8 @@ class MockPrincipal(object):
     id = 'mock principal'
 
 
+@implementer(IAuthentication)  # this is a lie.
 class MockAuthenticationUtility(object):
-    implements(IAuthentication)  # this is a lie.
 
     status = None
 
@@ -49,45 +49,45 @@ class TestErrorViews(TestCase):
         self.request = TestRequest()
 
     def test_defaultname(self):
-        self.assertEquals(
+        self.assertEqual(
             getDefaultViewName(Exception(), self.request), 'index.html')
         error = NotFound(object(), self.request)
-        self.assertEquals(
+        self.assertEqual(
             getDefaultViewName(error, self.request), 'index.html')
-        self.assertEquals(
+        self.assertEqual(
             getDefaultViewName(
                 Unauthorized(), self.request), 'index.html')
 
     def test_exceptionview(self):
         view = getMultiAdapter((Exception(), self.request), name='index.html')
-        self.assertEquals(view(), 'A system error occurred.')
-        self.assertEquals(self.request.response.getStatus(), 500)
+        self.assertEqual(view(), 'A system error occurred.')
+        self.assertEqual(self.request.response.getStatus(), 500)
 
     def test_notfoundview(self):
         error = NotFound(object(), self.request)
         view = getMultiAdapter((error, self.request), name='index.html')
-        self.failUnless(IHTTPException.providedBy(view))
-        self.assertEquals(view(), 'The requested resource can not be found.')
-        self.assertEquals(self.request.response.getStatus(), 404)
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(view(), 'The requested resource can not be found.')
+        self.assertEqual(self.request.response.getStatus(), 404)
 
     def test_unauthorizedview(self):
         self.request.setPrincipal(MockPrincipal())
         view = getMultiAdapter(
             (Unauthorized(), self.request), name='index.html')
-        self.failUnless(IHTTPException.providedBy(view))
-        self.assertEquals(
+        self.assertTrue(IHTTPException.providedBy(view))
+        self.assertEqual(
             view(), 'Access to the requested resource is forbidden.')
-        self.assertEquals(self.request.response.getStatus(), 403)
+        self.assertEqual(self.request.response.getStatus(), 403)
 
         getUtility(IAuthentication).status = 401
-        self.assertEquals(
+        self.assertEqual(
             view(), 'Access to the requested resource is forbidden.')
-        self.assertEquals(self.request.response.getStatus(), 401)
+        self.assertEqual(self.request.response.getStatus(), 401)
 
         getUtility(IAuthentication).status = 302
-        self.assertEquals(view(), '')
-        self.assertEquals(self.request.response.getStatus(), 302)
+        self.assertEqual(view(), '')
+        self.assertEqual(self.request.response.getStatus(), 302)
 
         getUtility(IAuthentication).status = 303
-        self.assertEquals(view(), '')
-        self.assertEquals(self.request.response.getStatus(), 303)
+        self.assertEqual(view(), '')
+        self.assertEqual(self.request.response.getStatus(), 303)
