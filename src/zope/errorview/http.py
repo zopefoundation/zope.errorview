@@ -13,12 +13,13 @@
 ##############################################################################
 
 from zope.browser.interfaces import ISystemErrorView
-from zope.interface import implements
+from zope.interface import implementer
 from zope.publisher.interfaces.http import IHTTPException
 from zope.event import notify
 from zope.errorview.interfaces import HandleExceptionEvent
 
 
+@implementer(ISystemErrorView)
 class SystemErrorViewMixin(object):
     """An optional mixin to indicate a particular error view to be an "system
     error" view. This indicates the publication object to log the error again
@@ -26,15 +27,12 @@ class SystemErrorViewMixin(object):
 
     """
 
-    implements(ISystemErrorView)
-
     def isSystemError(self):
         return True
 
 
+@implementer(IHTTPException)
 class ExceptionViewBase(object):
-
-    implements(IHTTPException)
 
     def __init__(self, context, request):
         self.context = context
