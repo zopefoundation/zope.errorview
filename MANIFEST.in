@@ -1,7 +1,9 @@
-include *.txt
+include *.py
 include *.rst
-include bootstrap.py
 include buildout.cfg
 include tox.ini
 include .travis.yml
-recursive-include src *.*
+include .coveragerc
+recursive-include src *.po
+recursive-include src *.pot
+recursive-include src *.zcml

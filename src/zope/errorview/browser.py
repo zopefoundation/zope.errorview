@@ -15,7 +15,7 @@
 from zope.authentication.interfaces import IAuthentication
 from zope.component import getUtility
 from zope.errorview.http import ExceptionViewBase
-from zope.errorview.http import UnauthorizedView
+from zope.errorview.http import UnauthorizedView as HTTPUnauthorizedView
 from zope.publisher.browser import BrowserPage
 
 from zope.errorview.i18n import _
@@ -39,7 +39,7 @@ class NotFoundView(ExceptionViewBase, BrowserPage):
         return translate(msg, context=self.request, default=msg)
 
 
-class UnauthorizedView(UnauthorizedView, BrowserPage):
+class UnauthorizedView(HTTPUnauthorizedView, BrowserPage):
 
     def update(self):
         # Set the error status to 403 (Forbidden) in the case when we

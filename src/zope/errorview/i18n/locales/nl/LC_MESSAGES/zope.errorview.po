@@ -25,7 +25,7 @@ msgstr ""
 
 #: zope/errorview/browser.py:26
 msgid "A system error occurred."
-msgstr "Er is een systeem fout opgetreden."
+msgstr "Er is een systeemfout opgetreden."
 
 #: zope/errorview/browser.py:35
 msgid "The requested resource can not be found."

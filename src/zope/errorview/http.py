@@ -1,4 +1,4 @@
-##############################################################################
+atom ##############################################################################
 #
 # Copyright (c) 2011 Zope Foundation and Contributors.
 # All Rights Reserved.
@@ -27,14 +27,12 @@ class SystemErrorViewMixin(object):
 
     """
 
-
     def isSystemError(self):
         return True
 
 
 @implementer(IHTTPException)
 class ExceptionViewBase(object):
-
 
     def __init__(self, context, request):
         self.context = context
