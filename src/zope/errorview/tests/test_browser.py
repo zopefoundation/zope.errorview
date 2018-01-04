@@ -16,7 +16,7 @@ from unittest import TestCase
 from zope.authentication.interfaces import IAuthentication
 from zope.component import getUtility, getMultiAdapter
 from zope.component.testlayer import ZCMLFileLayer
-from zope.interface import implements
+from zope.interface import implementer
 from zope.publisher.browser import TestRequest
 from zope.publisher.defaultview import getDefaultViewName
 from zope.publisher.interfaces.http import IHTTPException
@@ -31,8 +31,8 @@ class MockPrincipal(object):
     id = 'mock principal'
 
 
+@implementer(IAuthentication)
 class MockAuthenticationUtility(object):
-    implements(IAuthentication)  # this is a lie.
 
     status = None
 
