@@ -40,6 +40,8 @@ class ExceptionViewBase(object):
 
     def update(self):
         self.request.response.setStatus(500)
+        self.request.response.setHeader(
+            'Content-Type', 'text/plain; charset=utf-8')
 
     def render(self):
         return ''
@@ -60,6 +62,7 @@ class ExceptionView(ExceptionViewBase):
 class TraversalExceptionView(ExceptionViewBase):
 
     def update(self):
+        super(TraversalExceptionView, self).update()
         if self.request.method == 'MKCOL' and self.request.getTraversalStack():
             # MKCOL with non-existing parent.
             self.request.response.setStatus(409)
@@ -70,6 +73,7 @@ class TraversalExceptionView(ExceptionViewBase):
 class UnauthorizedView(ExceptionViewBase):
 
     def update(self):
+        super(UnauthorizedView, self).update()
         self.request.unauthorized('basic realm="Zope"')
         self.request.response.setStatus(401)
 
@@ -85,6 +89,7 @@ class MethodNotAllowedView(ExceptionViewBase):
         return []
 
     def update(self):
+        super(MethodNotAllowedView, self).update()
         allow = self.allowed()
         self.request.response.setStatus(405)
         self.request.response.setHeader('Allow', ', '.join(allow))
