@@ -5,8 +5,12 @@
 1.0.1 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Additional fixes for Python 3 compatibility.
 
+  NOTE: The error view base classes now set a Content-Type response header to
+  "text/plain". If your error view subclassing from the zope.errorview classes
+  return a response body other than "text/plain" you need to explicitly set
+  the Content-Type in your views.
 
 1.0.0 (2017-05-10)
 ==================
@@ -15,12 +19,10 @@
 
 - Fix typo in Dutch translation
 
-
 0.11 (2011-06-28)
 =================
 
 - Added nl translations.
-
 
 0.10 (2011-02-08)
 =================

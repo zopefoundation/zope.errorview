@@ -10,7 +10,7 @@ python:
 install:
     - pip install -U pip setuptools
     - pip install -U coverage coveralls
-    - pip install -U -e .[test,browser]
+    - pip install -U -e .[test]
 script:
     - coverage run -m zope.testrunner --test-path=src  --auto-color --auto-progress
 notifications:
