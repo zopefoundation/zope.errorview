@@ -52,6 +52,8 @@ class UnauthorizedView(HTTPUnauthorizedView, BrowserPage):
             'Cache-Control', 'no-store, no-cache, must-revalidate')
         self.request.response.setHeader(
             'Pragma', 'no-cache')
+        self.request.response.setHeader(
+            'Content-Type', 'text/plain;charset=utf-8')
         principal = self.request.principal
         getUtility(IAuthentication).unauthorized(principal.id, self.request)
 
