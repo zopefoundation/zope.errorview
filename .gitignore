@@ -3,8 +3,6 @@ __pycache__/
 .installed.cfg
 .mr.developer.cfg
 .tox/
-.tox/
-*.egg-info/
 *.egg-info/
 *.py[co]
 bin/
@@ -12,5 +10,4 @@ build/
 develop-eggs/
 dist/
 htmlcov/
-parts
-src/z3c.recipe.i18n/
+parts/
