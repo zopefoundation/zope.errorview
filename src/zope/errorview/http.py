@@ -41,7 +41,7 @@ class ExceptionViewBase(object):
     def update(self):
         self.request.response.setStatus(500)
         self.request.response.setHeader(
-            'Content-Type', 'text/plain; charset=utf-8')
+            'Content-Type', 'text/plain;charset=utf-8')
 
     def render(self):
         return ''

@@ -5,8 +5,10 @@
 1.2 (unreleased)
 ================
 
-- Nothing changed yet.
-
+- Remove the whitespace between the content-type and charset of the default
+  error views. This is because in certain cases zope.publisher.http will parse
+  the content type parameters and combine them back again without the
+  whitespace. This fix makes things more predictable esp. in tests.
 
 1.1 (2018-01-10)
 ================
