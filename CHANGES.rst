@@ -2,8 +2,8 @@
  CHANGES
 =========
 
-1.2 (unreleased)
-================
+1.2.0 (2018-01-15)
+==================
 
 - Remove the whitespace between the content-type and charset of the default
   error views. This is because in certain cases zope.publisher.http will parse
