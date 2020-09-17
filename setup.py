@@ -26,6 +26,7 @@ def read(*rnames):
     with open(os.path.join(os.path.dirname(__file__), *rnames)) as f:
         return f.read()
 
+
 browser_requires = [
     'zope.authentication',
     'zope.browser',
@@ -38,7 +39,7 @@ tests_require = [
 ] + browser_requires
 
 setup(name='zope.errorview',
-      version='1.2.1.dev0',
+      version='1.3.0.dev0',
       author='Zope Corporation and Contributors',
       author_email='zope-dev@zope.org',
       description='Basic HTTP and Browser exception views.',
@@ -57,10 +58,10 @@ setup(name='zope.errorview',
           'Programming Language :: Python :: 2',
           'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3',
-          'Programming Language :: Python :: 3.3',
-          'Programming Language :: Python :: 3.4',
           'Programming Language :: Python :: 3.5',
           'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7',
+          'Programming Language :: Python :: 3.8',
           'Programming Language :: Python :: Implementation :: CPython',
           'Programming Language :: Python :: Implementation :: PyPy',
           'Natural Language :: English',
