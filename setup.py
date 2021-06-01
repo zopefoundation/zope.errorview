@@ -47,7 +47,7 @@ setup(name='zope.errorview',
           read('README.rst')
           + '\n\n' +
           read('CHANGES.rst')
-          ),
+      ),
       keywords="zope3 http error view",
       classifiers=[
           'Development Status :: 5 - Production/Stable',
@@ -62,6 +62,7 @@ setup(name='zope.errorview',
           'Programming Language :: Python :: 3.6',
           'Programming Language :: Python :: 3.7',
           'Programming Language :: Python :: 3.8',
+          'Programming Language :: Python :: 3.9',
           'Programming Language :: Python :: Implementation :: CPython',
           'Programming Language :: Python :: Implementation :: PyPy',
           'Natural Language :: English',
@@ -90,4 +91,4 @@ setup(name='zope.errorview',
       ],
       include_package_data=True,
       zip_safe=False,
-)
+      )
