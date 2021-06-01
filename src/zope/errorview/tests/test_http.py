@@ -143,7 +143,7 @@ class TestErrorViewsFunctional(TestCase):
 
     def test_notfound(self):
         view = getMultiAdapter((NotFound(object(), self.request),
-                               self.request),
+                                self.request),
                                name='index.html')
         self.assertTrue(IHTTPException.providedBy(view))
         self.assertEqual(view(), '')
