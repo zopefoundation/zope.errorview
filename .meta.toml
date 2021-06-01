@@ -1,0 +1,31 @@
+# Generated from:
+# https://github.com/zopefoundation/meta/tree/master/config/pure-python
+[meta]
+template = "pure-python"
+commit-id = "fc0fd48fd0da9ed0af46c29d9c3a337fa9a9756f"
+
+[python]
+with-appveyor = false
+with-pypy = true
+with-legacy-python = true
+with-docs = false
+with-sphinx-doctests = false
+
+[tox]
+use-flake8 = true
+
+[coverage]
+fail-under = 100
+
+[manifest]
+additional-rules = [
+    "recursive-include src *.po",
+    "recursive-include src *.pot",
+    "recursive-include src *.zcml",
+    ]
+
+[check-manifest]
+ignore-bad-ideas = [
+    "src/zope/errorview/i18n/locales/en/LC_MESSAGES/zope.errorview.mo",
+    "src/zope/errorview/i18n/locales/nl/LC_MESSAGES/zope.errorview.mo",
+    ]
