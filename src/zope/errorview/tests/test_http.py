@@ -13,19 +13,24 @@
 ##############################################################################
 
 from unittest import TestCase
+
 from zope.browser.interfaces import ISystemErrorView
-from zope.component import getMultiAdapter, provideAdapter
+from zope.component import getMultiAdapter
+from zope.component import provideAdapter
 from zope.component.testlayer import ZCMLFileLayer
-from zope.errorview import http
 from zope.interface import Interface
 from zope.publisher.defaultview import getDefaultViewName
 from zope.publisher.http import HTTPRequest
-from zope.publisher.interfaces.http import IHTTPException, IHTTPRequest
-from zope.publisher.interfaces.http import MethodNotAllowed, IMethodNotAllowed
-from zope.publisher.interfaces import TraversalException, NotFound
+from zope.publisher.interfaces import NotFound
+from zope.publisher.interfaces import TraversalException
+from zope.publisher.interfaces.http import IHTTPException
+from zope.publisher.interfaces.http import IHTTPRequest
+from zope.publisher.interfaces.http import IMethodNotAllowed
+from zope.publisher.interfaces.http import MethodNotAllowed
 from zope.security.interfaces import Unauthorized
 
 import zope.errorview
+from zope.errorview import http
 
 
 class TestErrorViews(TestCase):

@@ -14,12 +14,12 @@
 
 from zope.authentication.interfaces import IAuthentication
 from zope.component import getUtility
-from zope.errorview.http import ExceptionViewBase
-from zope.errorview.http import UnauthorizedView as HTTPUnauthorizedView
+from zope.i18n import translate
 from zope.publisher.browser import BrowserPage
 
+from zope.errorview.http import ExceptionViewBase
+from zope.errorview.http import UnauthorizedView as HTTPUnauthorizedView
 from zope.errorview.i18n import _
-from zope.i18n import translate
 
 
 class ExceptionView(ExceptionViewBase, BrowserPage):

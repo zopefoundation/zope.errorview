@@ -13,9 +13,10 @@
 ##############################################################################
 
 from zope.browser.interfaces import ISystemErrorView
+from zope.event import notify
 from zope.interface import implementer
 from zope.publisher.interfaces.http import IHTTPException
-from zope.event import notify
+
 from zope.errorview.interfaces import HandleExceptionEvent
 
 

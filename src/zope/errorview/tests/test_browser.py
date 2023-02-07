@@ -13,16 +13,20 @@
 ##############################################################################
 
 from unittest import TestCase
+
 from zope.authentication.interfaces import IAuthentication
-from zope.component import getUtility, getMultiAdapter
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.component.testlayer import ZCMLFileLayer
 from zope.interface import implementer
 from zope.publisher.browser import TestRequest
 from zope.publisher.defaultview import getDefaultViewName
-from zope.publisher.interfaces.http import IHTTPException
 from zope.publisher.interfaces import NotFound
+from zope.publisher.interfaces.http import IHTTPException
 from zope.security.interfaces import Unauthorized
+
 import zope.errorview
+
 
 browser_layer = ZCMLFileLayer(zope.errorview.tests)
 

@@ -1,4 +1,6 @@
-from zope.interface import Interface, implementer, Attribute
+from zope.interface import Attribute
+from zope.interface import Interface
+from zope.interface import implementer
 
 
 class IHandleExceptionEvent(Interface):
