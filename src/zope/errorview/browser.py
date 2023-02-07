@@ -25,7 +25,7 @@ from zope.errorview.i18n import _
 class ExceptionView(ExceptionViewBase, BrowserPage):
 
     def render(self):
-        msg = _(u'A system error occurred.')
+        msg = _('A system error occurred.')
         return translate(msg, context=self.request, default=msg)
 
 
@@ -35,7 +35,7 @@ class NotFoundView(ExceptionViewBase, BrowserPage):
         self.request.response.setStatus(404)
 
     def render(self):
-        msg = _(u'The requested resource can not be found.')
+        msg = _('The requested resource can not be found.')
         return translate(msg, context=self.request, default=msg)
 
 
@@ -59,6 +59,6 @@ class UnauthorizedView(HTTPUnauthorizedView, BrowserPage):
 
     def render(self):
         if self.request.response.getStatus() not in (302, 303):
-            msg = _(u'Access to the requested resource is forbidden.')
+            msg = _('Access to the requested resource is forbidden.')
             return translate(msg, context=self.request, default=msg)
         return ''

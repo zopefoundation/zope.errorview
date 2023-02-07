@@ -10,7 +10,7 @@ class IHandleExceptionEvent(Interface):
 
 
 @implementer(IHandleExceptionEvent)
-class HandleExceptionEvent(object):
+class HandleExceptionEvent:
 
     def __init__(self, request):
         self.request = request

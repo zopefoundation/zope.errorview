@@ -12,7 +12,7 @@
 #
 ##############################################################################
 # This package is developed by the Zope Toolkit project, documented here:
-# http://docs.zope.org/zopetoolkit
+# https://zopetoolkit.readthedocs.io/
 # When developing and releasing this package, please follow the documented
 # Zope Toolkit policies as described by this documentation.
 ##############################################################################
@@ -43,7 +43,7 @@ tests_require = [
 setup(name='zope.errorview',
       version='2.0.dev0',
       author='Zope Corporation and Contributors',
-      author_email='zope-dev@zope.org',
+      author_email='zope-dev@zope.dev',
       description='Basic HTTP and Browser exception views.',
       long_description=(
           read('README.rst')
@@ -70,11 +70,12 @@ setup(name='zope.errorview',
           'Topic :: Internet :: WWW/HTTP',
           'Framework :: Zope :: 3',
       ],
-      url='http://github.com/zopefoundation/zope.errorview',
+      url='https://github.com/zopefoundation/zope.errorview',
       license='ZPL 2.1',
       packages=find_packages('src'),
       package_dir={'': 'src'},
       namespace_packages=['zope'],
+      python_requires='>=3.7',
       extras_require={
           'test': tests_require,
           'browser': browser_requires,

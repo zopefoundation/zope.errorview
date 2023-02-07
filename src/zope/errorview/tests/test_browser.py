@@ -31,12 +31,12 @@ import zope.errorview
 browser_layer = ZCMLFileLayer(zope.errorview.tests)
 
 
-class MockPrincipal(object):
+class MockPrincipal:
     id = 'mock principal'
 
 
 @implementer(IAuthentication)  # this is a lie.
-class MockAuthenticationUtility(object):
+class MockAuthenticationUtility:
 
     status = None
 
