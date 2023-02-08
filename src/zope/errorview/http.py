@@ -13,14 +13,15 @@
 ##############################################################################
 
 from zope.browser.interfaces import ISystemErrorView
+from zope.event import notify
 from zope.interface import implementer
 from zope.publisher.interfaces.http import IHTTPException
-from zope.event import notify
+
 from zope.errorview.interfaces import HandleExceptionEvent
 
 
 @implementer(ISystemErrorView)
-class SystemErrorViewMixin(object):
+class SystemErrorViewMixin:
     """An optional mixin to indicate a particular error view to be an "system
     error" view. This indicates the publication object to log the error again
     with the error reporting utility.
@@ -32,7 +33,7 @@ class SystemErrorViewMixin(object):
 
 
 @implementer(IHTTPException)
-class ExceptionViewBase(object):
+class ExceptionViewBase:
 
     def __init__(self, context, request):
         self.context = context
@@ -62,7 +63,7 @@ class ExceptionView(ExceptionViewBase):
 class TraversalExceptionView(ExceptionViewBase):
 
     def update(self):
-        super(TraversalExceptionView, self).update()
+        super().update()
         if self.request.method == 'MKCOL' and self.request.getTraversalStack():
             # MKCOL with non-existing parent.
             self.request.response.setStatus(409)
@@ -73,7 +74,7 @@ class TraversalExceptionView(ExceptionViewBase):
 class UnauthorizedView(ExceptionViewBase):
 
     def update(self):
-        super(UnauthorizedView, self).update()
+        super().update()
         self.request.unauthorized('basic realm="Zope"')
         self.request.response.setStatus(401)
 
@@ -89,7 +90,7 @@ class MethodNotAllowedView(ExceptionViewBase):
         return []
 
     def update(self):
-        super(MethodNotAllowedView, self).update()
+        super().update()
         allow = self.allowed()
         self.request.response.setStatus(405)
         self.request.response.setHeader('Allow', ', '.join(allow))
