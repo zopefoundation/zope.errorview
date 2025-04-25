@@ -1,6 +1,6 @@
 ##############################################################################
 #
-# Copyright (c) 2006 Zope Corporation and Contributors.
+# Copyright (c) 2006 Zope Foundation and Contributors.
 # All Rights Reserved.
 #
 # This software is subject to the provisions of the Zope Public License,
@@ -42,7 +42,7 @@ tests_require = [
 
 setup(name='zope.errorview',
       version='2.1.dev0',
-      author='Zope Corporation and Contributors',
+      author='Zope Foundation and Contributors',
       author_email='zope-dev@zope.dev',
       description='Basic HTTP and Browser exception views.',
       long_description=(
@@ -58,11 +58,11 @@ setup(name='zope.errorview',
           'License :: OSI Approved :: Zope Public License',
           'Programming Language :: Python',
           'Programming Language :: Python :: 3',
-          'Programming Language :: Python :: 3.7',
-          'Programming Language :: Python :: 3.8',
           'Programming Language :: Python :: 3.9',
           'Programming Language :: Python :: 3.10',
           'Programming Language :: Python :: 3.11',
+          'Programming Language :: Python :: 3.12',
+          'Programming Language :: Python :: 3.13',
           'Programming Language :: Python :: Implementation :: CPython',
           'Programming Language :: Python :: Implementation :: PyPy',
           'Natural Language :: English',
@@ -71,11 +71,11 @@ setup(name='zope.errorview',
           'Framework :: Zope :: 3',
       ],
       url='https://github.com/zopefoundation/zope.errorview',
-      license='ZPL 2.1',
+      license='ZPL-2.1',
       packages=find_packages('src'),
       package_dir={'': 'src'},
       namespace_packages=['zope'],
-      python_requires='>=3.7',
+      python_requires='>=3.9',
       extras_require={
           'test': tests_require,
           'browser': browser_requires,
