@@ -41,7 +41,7 @@ tests_require = [
 ] + browser_requires
 
 setup(name='zope.errorview',
-      version='2.1',
+      version='2.2.dev0',
       author='Zope Foundation and Contributors',
       author_email='zope-dev@zope.dev',
       description='Basic HTTP and Browser exception views.',
