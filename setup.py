@@ -20,7 +20,6 @@
 """
 import os
 
-from setuptools import find_packages
 from setuptools import setup
 
 
@@ -37,11 +36,11 @@ browser_requires = [
 
 tests_require = [
     'zope.testing',
-    'zope.testrunner',
+    'zope.testrunner >= 6.4',
 ] + browser_requires
 
 setup(name='zope.errorview',
-      version='2.2.dev0',
+      version='3.0.dev0',
       author='Zope Foundation and Contributors',
       author_email='zope-dev@zope.dev',
       description='Basic HTTP and Browser exception views.',
@@ -72,9 +71,6 @@ setup(name='zope.errorview',
       ],
       url='https://github.com/zopefoundation/zope.errorview',
       license='ZPL-2.1',
-      packages=find_packages('src'),
-      package_dir={'': 'src'},
-      namespace_packages=['zope'],
       python_requires='>=3.9',
       extras_require={
           'test': tests_require,
