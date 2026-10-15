@@ -34,4 +34,3 @@ msgstr "The requested resource can not be found."
 #: zope/errorview/browser.py:56
 msgid "Access to the requested resource is forbidden."
 msgstr "Access to the requested resource is forbidden."
-
