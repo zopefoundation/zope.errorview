@@ -34,4 +34,3 @@ msgstr "De opgevraagde pagina kan niet worden gevonden."
 #: zope/errorview/browser.py:56
 msgid "Access to the requested resource is forbidden."
 msgstr "Toegang geweigerd."
-
